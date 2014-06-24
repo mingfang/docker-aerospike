@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#sv start socklog-unix || exit 1
+
+cd /aerospike-server/instance
+exec 2>&1
+exec ./bin/aerospike start 
