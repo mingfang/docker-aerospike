@@ -17,21 +17,20 @@ RUN sed -i "s/PermitRootLogin without-password/#PermitRootLogin without-password
 #Utilities
 RUN apt-get install -y vim less net-tools inetutils-ping curl git telnet nmap socat dnsutils netcat tree htop unzip sudo software-properties-common
 
-#Aerospike
-RUN curl -L http://www.aerospike.com/download/server/3.3.5/artifact/tgz | tar xz
+#To build AMC
+RUN apt-get install -y build-essential python-dev python-pip man
 
-#Init instance
-RUN cd aerospike* && \
-    mkdir instance && \
-    cd instance && \
-    ../bin/aerospike init && \
-    sed -i "s|run-as-daemon|run-as-daemon false|" /aerospike-server/instance/etc/aerospike.conf
+#Aerospike
+RUN curl -L http://www.aerospike.com/download/server/3.3.9/artifact/ubuntu12 | tar xz && \
+    cd aerospike* && \
+    dpkg -i aerospike-server*.deb && \
+    dpkg -i aerospike-tools*.deb && \
+    rm -rf /aerospike*
 
 #AMC
-RUN apt-get install -y build-essential python-dev python-pip man
-RUN curl -L http://www.aerospike.com/download/amc/3.4.3/artifact/macosx | tar x
-RUN cd aerospike-amc* && \
-    echo "y\n" | ./install
+RUN wget -O amc.deb http://www.aerospike.com/download/amc/3.4.5/artifact/ubuntu12 && \
+    dpkg -i amc.deb && \
+    rm amc.deb
 
 #Add runit services
 ADD sv /etc/service 
