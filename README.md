@@ -1,4 +1,4 @@
 docker-aerospike
 ================
 
-Runs Aerospike and AMC inside Docker
+Runs [Aerospike](http://www.aerospike.com) and AMC inside Docker
