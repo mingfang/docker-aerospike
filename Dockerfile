@@ -21,14 +21,14 @@ RUN apt-get install -y vim less net-tools inetutils-ping curl git telnet nmap so
 RUN apt-get install -y build-essential python-dev python-pip man
 
 #Aerospike
-RUN curl -L http://www.aerospike.com/download/server/3.3.9/artifact/ubuntu12 | tar xz && \
+RUN curl -L http://www.aerospike.com/download/server/3.3.19/artifact/ubuntu12 | tar xz && \
     cd aerospike* && \
     dpkg -i aerospike-server*.deb && \
     dpkg -i aerospike-tools*.deb && \
     rm -rf /aerospike*
 
 #AMC
-RUN wget -O amc.deb http://www.aerospike.com/download/amc/3.4.5/artifact/ubuntu12 && \
+RUN wget -O amc.deb http://www.aerospike.com/download/amc/3.4.6/artifact/ubuntu12 && \
     dpkg -i amc.deb && \
     rm amc.deb
 
